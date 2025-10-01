@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sreyashi Chowdhury | Portfolio</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0f111a;
+      color: #fff;
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --primary: #6C63FF;   /* Neon purple */
+      --secondary: #00E0FF; /* Neon teal */
+      --bg-dark: #0f111a;
+      --bg-card: #1a1c2b;
+      --text-light: #fff;
+      --text-muted: #a1a1b3;
+      --shadow-glow: 0 0 15px rgba(108, 99, 255, 0.6);
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      padding: 4rem 1rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom-left-radius: 50% 15%;
+      border-bottom-right-radius: 50% 15%;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-light);
+      text-shadow: 0 0 10px rgba(108, 99, 255, 0.7);
+    }
+
+    header p {
+      font-size: 1.3rem;
+      color: var(--text-light);
+      opacity: 0.9;
+    }
+
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #11121f;
+      padding: 1rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      color: var(--text-light);
+      margin: 0 20px;
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -3px;
+      left: 0;
+      background: var(--secondary);
+      transition: 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Sections */
+    section {
+      padding: 4rem 10%;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease-in-out;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--secondary);
+      font-size: 2.2rem;
+      text-shadow: 0 0 8px rgba(0,224,255,0.5);
+    }
+
+    /* Cards */
+    .about, .skills, .projects, .contact {
+      background: var(--bg-card);
+      margin-bottom: 3rem;
+      padding: 2.5rem;
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(0,224,255,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .about:hover, .skills:hover, .projects:hover, .contact:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 35px rgba(108, 99, 255, 0.5);
+    }
+
+    /* Skills */
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .skills-list span {
+      background: #1f1f3a;
+      color: var(--secondary);
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: default;
+      box-shadow: 0 0 10px rgba(0,224,255,0.3);
+    }
+
+    .skills-list span:hover {
+      transform: scale(1.1);
+      box-shadow: var(--shadow-glow);
+    }
+
+    /* Project Carousel */
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .carousel {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .project {
+      min-width: 100%;
+      margin-right: 20px;
+      background: #252746;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,224,255,0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .project h3 { 
+      margin-bottom: 1rem; 
+      color: var(--primary); 
+      text-shadow: 0 0 5px var(--primary);
+    }
+
+    .project p { 
+      font-size: 1rem; 
+      color: var(--text-light); 
+      line-height: 1.6;
+    }
+
+    .carousel-buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .carousel-buttons button {
+      background: var(--primary);
+      color: var(--text-light);
+      border: none;
+      padding: 12px 18px;
+      margin: 0 8px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 0 15px rgba(108, 99, 255,0.7);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .carousel-buttons button:hover { 
+      transform: scale(1.2);
+      box-shadow: 0 0 25px var(--secondary);
+    }
+
+    /* Contact */
+    .contact p, .contact a {
+      font-size: 1rem;
+      margin: 0.5rem 0;
+      color: var(--text-light);
+    }
+
+    .contact a { 
+      color: var(--secondary); 
+      font-weight: 600; 
+      transition: all 0.3s;
+    }
+
+    .contact a:hover { 
+      color: var(--primary); 
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #11121f;
+      color: var(--text-light);
+    }
+
+    /* Typing effect */
+    .typing {
+      display: inline-block;
+      border-right: 3px solid var(--secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      animation: typing 3s steps(30, end), blink 0.7s infinite;
+    }
+
+    @keyframes typing { from { width: 0; } to { width: 100%; } }
+    @keyframes blink { 50% { border-color: transparent; } }
+
+    @media(max-width:768px){
+      nav { flex-direction: column; gap: 10px; }
+      .carousel-buttons { flex-wrap: wrap; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Sreyashi Chowdhury</h1>
+    <p class="typing">Cybersecurity Enthusiast | Python Developer</p>
+  </header>
+
+  <!-- Navbar -->
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- About -->
+  <section id="about" class="about">
+    <h2>About Me</h2>
+    <p>
+      Hi, I’m Sreyashi Chowdhury. I love turning ideas into code, exploring cybersecurity, and creating projects that combine logic, creativity, and real-world impact. My focus is on Python development, ethical hacking, and building tools that make technology smarter and safer.
+    </p>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="skills">
+    <h2>Skills</h2>
+    <div class="skills-list">
+      <span><i class="fab fa-python"></i> Python</span>
+      <span>C/C++</span>
+      <span>HTML, CSS, JS</span>
+      <span><i class="fab fa-linux"></i> Linux</span>
+      <span><i class="fas fa-shield-alt"></i> Cybersecurity</span>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="projects">
+    <h2>Projects</h2>
+    <div class="carousel-container">
+      <div class="carousel" id="carousel">
+        <div class="project">
+          <h3>🌐 Port Scanner</h3>
+          <p>This Python Port Scanner performs fast TCP connect-based scans to discover open ports on a target host or IP range. It uses threading for concurrency and prints results in a clear table. Designed for learning and network troubleshooting.</p>
+        </div>
+        <div class="project">
+          <h3>❤️ Heart Disease Prediction</h3>
+          <p>Machine learning model predicting heart disease risk based on clinical data. Uses scikit-learn with Random Forest & Logistic Regression. Demonstrates real-world healthcare AI applications.</p>
+        </div>
+        <div class="project">
+          <h3>📱 Phone Number Tracker</h3>
+          <p>Python tool to extract phone number info like region, carrier, and timezone. Supports legal, consent-based device location tracking for educational purposes.</p>
+        </div>
+      </div>
+      <div class="carousel-buttons">
+        <button onclick="prevSlide()">&#8592;</button>
+        <button onclick="nextSlide()">&#8594;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:sreyashichowdhury7@gmail.com">sreyashichowdhury7@gmail.com</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/sreyashi-chowdhury-46a90b29b" target="_blank">linkedin.com/in/sreyashi-chowdhury</a></p>
+    <p>GitHub: <a href="https://github.com/geyfbgy" target="_blank">github.com/sreyashi</a></p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Sreyashi Chowdhury | Portfolio</p>
+  </footer>
+
+  <script>
+    // Scroll Fade-in Animation
+    const sections = document.querySelectorAll('section');
+    window.addEventListener('scroll', () => {
+      sections.forEach(sec => {
+        const top = sec.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        if(top < windowHeight - 100){
+          sec.classList.add('visible');
+        }
+      });
+    });
+
+    // Project Carousel
+    const carousel = document.getElementById('carousel');
+    let index = 0;
+    function showSlide(i){
+      const slides = carousel.children.length;
+      if(i < 0) index = slides - 1;
+      else if(i >= slides) index = 0;
+      else index = i;
+      carousel.style.transform = `translateX(-${index*100}%)`;
+    }
+    function nextSlide(){ showSlide(index + 1); }
+    function prevSlide(){ showSlide(index - 1); }
+  </script>
+
+</body>
+</html>
